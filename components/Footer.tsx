@@ -1,5 +1,6 @@
 import React from 'react';
 import { Facebook, Instagram, Twitter, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
@@ -29,28 +30,29 @@ const Footer: React.FC = () => {
                 <div>
                     <h4 className="font-serif text-lg mb-6 text-accent">Shop</h4>
                     <ul className="space-y-3 text-sm text-secondary/70 font-light">
-                        <li><a href="#" className="hover:text-white transition">Skincare</a></li>
-                        <li><a href="#" className="hover:text-white transition">Body & Bath</a></li>
-                        <li><a href="#" className="hover:text-white transition">Gift Sets</a></li>
-                        <li><a href="#" className="hover:text-white transition">New Arrivals</a></li>
+                        <li><Link to="/shop?category=skincare" className="hover:text-white transition">Skincare</Link></li>
+                        <li><Link to="/shop?category=body" className="hover:text-white transition">Body & Bath</Link></li>
+                        <li><Link to="/shop?filter=sets" className="hover:text-white transition">Gift Sets</Link></li>
+                        <li><Link to="/shop?filter=new" className="hover:text-white transition">New Arrivals</Link></li>
                     </ul>
                 </div>
                 <div>
                     <h4 className="font-serif text-lg mb-6 text-accent">About</h4>
                     <ul className="space-y-3 text-sm text-secondary/70 font-light">
-                        <li><a href="#" className="hover:text-white transition">Our Story</a></li>
-                        <li><a href="#" className="hover:text-white transition">Ingredients</a></li>
-                        <li><a href="#" className="hover:text-white transition">Sustainability</a></li>
-                        <li><a href="#" className="hover:text-white transition">Journal</a></li>
+                        <li><Link to="/about" className="hover:text-white transition">Our Story</Link></li>
+                        <li><Link to="/about" className="hover:text-white transition">Ingredients</Link></li>
+                        <li><Link to="/about" className="hover:text-white transition">Sustainability</Link></li>
+                        <li><Link to="/journal" className="hover:text-white transition">Journal</Link></li>
                     </ul>
                 </div>
                 <div className="col-span-2 md:col-span-1">
                     <h4 className="font-serif text-lg mb-6 text-accent">Support</h4>
                     <ul className="space-y-3 text-sm text-secondary/70 font-light">
-                        <li><a href="#" className="hover:text-white transition">FAQ</a></li>
-                        <li><a href="#" className="hover:text-white transition">Shipping</a></li>
-                        <li><a href="#" className="hover:text-white transition">Returns</a></li>
-                        <li><a href="#" className="hover:text-white transition">Contact Us</a></li>
+                        <li><Link to="/faq" className="hover:text-white transition">FAQ</Link></li>
+                        <li><Link to="/shipping" className="hover:text-white transition">Shipping</Link></li>
+                        <li><Link to="/returns" className="hover:text-white transition">Returns</Link></li>
+                        <li><Link to="/contact" className="hover:text-white transition">Contact Us</Link></li>
+                        <li><Link to="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
                     </ul>
                 </div>
             </div>

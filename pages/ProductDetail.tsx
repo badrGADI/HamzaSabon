@@ -1,15 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PRODUCTS } from '../constants';
-import { Star, Minus, Plus, ChevronRight, Truck, ShieldCheck, Leaf } from 'lucide-react';
+import { Star, Minus, Plus, ChevronRight, Truck, ShieldCheck, Leaf, MessageCircle } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const product = PRODUCTS.find(p => p.id === Number(id));
+  const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
 
   if (!product) {
     return <div className="h-screen flex items-center justify-center text-primary">Product not found</div>;
   }
+
+  const handleIncrement = () => setQuantity(prev => prev + 1);
+  const handleDecrement = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
+  
+  const totalPrice = product.price * quantity;
+  
+  const handleWhatsAppOrder = () => {
+    const phoneNumber = "+212654352802";
+    const message = `🛍️ *Nouvelle Commande - Naturvibe*\n\n` +
+                   `📦 *Produit:* ${product.name}\n` +
+                   `🏷️ *Catégorie:* ${product.category}\n` +
+                   `💰 *Prix unitaire:* ${product.price.toFixed(2)} DH\n` +
+                   `🔢 *Quantité:* ${quantity}\n` +
+                   `💵 *Prix Total:* ${totalPrice.toFixed(2)} DH\n\n` +
+                   `Je souhaite commander ce produit. Merci!`;
+    
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const handleAddToCart = () => {
+    // Only add to cart, don't open WhatsApp
+    addToCart(product, quantity);
+  };
 
   return (
     <div className="bg-secondary min-h-screen pt-10 pb-24 animate-fade-in">
@@ -58,7 +85,8 @@ const ProductDetail: React.FC = () => {
 
                 <h1 className="font-serif text-4xl md:text-5xl text-primary mb-2">{product.name}</h1>
                 <p className="text-sm uppercase tracking-widest text-primary/60 mb-6">{product.category}</p>
-                <p className="text-2xl text-primary font-medium mb-8">{product.price}</p>
+                <p className="text-2xl text-primary font-medium mb-2">{product.price.toFixed(2)} DH</p>
+                <p className="text-lg text-accent font-bold mb-8">Total: {totalPrice.toFixed(2)} DH</p>
 
                 <div className="prose text-primary/70 font-light mb-10 leading-relaxed">
                     <p>
@@ -69,16 +97,28 @@ const ProductDetail: React.FC = () => {
                 </div>
 
                 {/* Quantity & Add to Cart */}
-                <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                <div className="flex flex-col sm:flex-row gap-4 mb-6">
                     <div className="flex items-center justify-between border border-primary/20 px-4 py-3 w-32">
-                        <button className="text-primary/60 hover:text-primary"><Minus size={16}/></button>
-                        <span className="text-sm font-medium">1</span>
-                        <button className="text-primary/60 hover:text-primary"><Plus size={16}/></button>
+                        <button onClick={handleDecrement} className="text-primary/60 hover:text-primary"><Minus size={16}/></button>
+                        <span className="text-sm font-medium">{quantity}</span>
+                        <button onClick={handleIncrement} className="text-primary/60 hover:text-primary"><Plus size={16}/></button>
                     </div>
-                    <button className="bg-primary text-white flex-1 py-4 uppercase text-xs tracking-widest hover:bg-accent transition-colors">
-                        Add to Cart - {product.price}
+                    <button 
+                        onClick={handleAddToCart}
+                        className="bg-primary text-white flex-1 py-4 uppercase text-xs tracking-widest hover:bg-accent transition-colors"
+                    >
+                        Add to Cart - {totalPrice.toFixed(2)} DH
                     </button>
                 </div>
+
+                {/* WhatsApp Order Button */}
+                <button 
+                    onClick={handleWhatsAppOrder}
+                    className="w-full bg-[#25D366] text-white py-4 uppercase text-xs tracking-widest hover:bg-[#20BA5A] transition-colors flex items-center justify-center gap-2 mb-12"
+                >
+                    <MessageCircle size={18} />
+                    Commander via WhatsApp
+                </button>
 
                 {/* Benefits */}
                 <div className="border-t border-primary/10 pt-8 space-y-6">

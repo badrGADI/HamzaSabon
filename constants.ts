@@ -7,74 +7,155 @@ export const PROMO_MESSAGES = [
 ];
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Shop All', href: '/shop' },
-  { label: 'Best Sellers', href: '/shop?filter=best-sellers', isSpecial: true },
-  { label: 'Skincare', href: '/shop?category=skincare' },
-  { label: 'Body & Bath', href: '/shop?category=body' },
+  { label: 'Accueil', href: '/' },
+  { 
+    label: 'Collections', 
+    href: '/shop',
+    subItems: [
+      { label: 'Shop All', href: '/shop' },
+      { label: 'Skincare', href: '/shop?category=skincare' },
+      { label: 'Savon', href: '/shop?category=savon' },
+      { label: 'Shampo', href: '/shop?category=shampo' },
+      { label: 'Bomada', href: '/shop?category=bomada' },
+      { label: 'Oil', href: '/shop?category=oil' },
+      { label: 'Packs', href: '/shop?category=packs' },
+    ]
+  },
   { label: 'Our Story', href: '/about' },
   { label: 'Journal', href: '/journal' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const PRODUCTS: Product[] = [
+  // Skincare
+  {
+    id: 11,
+    name: "Midnight Recovery Serum",
+    category: "Skincare",
+    price: 85.00,
+    rating: 4.9,
+    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop",
+    tag: "Best Seller"
+  },
+  {
+    id: 12,
+    name: "Hydra-Glow Cream",
+    category: "Skincare",
+    price: 65.00,
+    rating: 4.7,
+    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop",
+    tag: "Trending"
+  },
+  {
+    id: 13,
+    name: "Botanical Essence Toner",
+    category: "Skincare",
+    price: 38.00,
+    rating: 4.6,
+    image: "https://images.unsplash.com/photo-1571875257727-256c39da42af?w=800&auto=format&fit=crop"
+  },
+  {
+    id: 14,
+    name: "Sacred Clay Mask",
+    category: "Skincare",
+    price: 55.00,
+    rating: 4.8,
+    image: "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?w=800&auto=format&fit=crop"
+  },
+
+  // Savon (Soaps)
   {
     id: 1,
-    name: "Midnight Recovery Serum",
-    category: "Restorative Night Oil",
-    price: "$85.00",
-    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop",
+    name: "Savon Noir Beldi",
+    category: "Savon",
+    price: 15.00,
+    rating: 4.8,
+    image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&auto=format&fit=crop",
     tag: "Best Seller"
   },
   {
     id: 2,
-    name: "Bamboo & Rice Scrub",
-    category: "Gentle Exfoliant",
-    price: "$42.00",
-    image: "https://images.unsplash.com/photo-1601049541289-9b3b7b5d7131?q=80&w=800&auto=format&fit=crop",
-    tag: "Sold Out"
+    name: "Savon Lavande & Karité",
+    category: "Savon",
+    price: 12.00,
+    rating: 4.5,
+    image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&auto=format&fit=crop"
   },
+  
+  // Shampo (Shampoos)
   {
     id: 3,
-    name: "Hydra-Glow Cream",
-    category: "Daily Moisturizer",
-    price: "$65.00",
-    image: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?q=80&w=800&auto=format&fit=crop",
-    tag: "Trending"
-  },
-  {
-    id: 4,
-    name: "Botanical Essence",
-    category: "Balancing Toner",
-    price: "$38.00",
-    image: "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?q=80&w=800&auto=format&fit=crop"
-  },
-  {
-    id: 5,
-    name: "Sacred Clay Mask",
-    category: "Purifying Treatment",
-    price: "$55.00",
-    image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop"
-  },
-  {
-    id: 6,
-    name: "Wild Rose Body Oil",
-    category: "Nourishing Body Care",
-    price: "$48.00",
-    image: "https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?q=80&w=800&auto=format&fit=crop"
-  },
-  {
-    id: 7,
-    name: "Vitamin C Radiance",
-    category: "Brightening Serum",
-    price: "$92.00",
-    image: "https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=800&auto=format&fit=crop",
+    name: "Shampo Argan Revitalisant",
+    category: "Shampo",
+    price: 25.00,
+    rating: 4.7,
+    image: "https://images.unsplash.com/photo-1571875257727-256c39da42af?w=800&auto=format&fit=crop",
     isNew: true
   },
   {
+    id: 4,
+    name: "Shampo Solide Ortie",
+    category: "Shampo",
+    price: 18.00,
+    rating: 4.6,
+    image: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=800&auto=format&fit=crop"
+  },
+
+  // Bomada (Pomades/Balms)
+  {
+    id: 5,
+    name: "Bomada Cicatrisante",
+    category: "Bomada",
+    price: 30.00,
+    rating: 4.9,
+    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop",
+    tag: "Trending"
+  },
+  {
+    id: 6,
+    name: "Bomada Hydratation Intense",
+    category: "Bomada",
+    price: 28.00,
+    rating: 4.8,
+    image: "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?w=800&auto=format&fit=crop"
+  },
+
+  // Oil (Oils)
+  {
+    id: 7,
+    name: "Huile d'Argan Pure",
+    category: "Oil",
+    price: 45.00,
+    rating: 5.0,
+    image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop",
+    tag: "Premium"
+  },
+  {
     id: 8,
-    name: "Lavender Mist",
-    category: "Calming Spray",
-    price: "$32.00",
-    image: "https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?q=80&w=800&auto=format&fit=crop"
+    name: "Huile de Pépin de Figue",
+    category: "Oil",
+    price: 55.00,
+    rating: 4.9,
+    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop"
+  },
+
+  // Packs (Gift Sets)
+  {
+    id: 9,
+    name: "Pack Rituel Hammam",
+    category: "Packs",
+    price: 85.00,
+    rating: 5.0,
+    image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&auto=format&fit=crop",
+    tag: "Gift Set"
+  },
+  {
+    id: 10,
+    name: "Pack Découverte Visage",
+    category: "Packs",
+    price: 65.00,
+    rating: 4.7,
+    image: "https://images.unsplash.com/photo-1571781535009-2b948dee3183?w=800&auto=format&fit=crop"
   }
 ];
 
@@ -110,7 +191,7 @@ export const JOURNAL_POSTS = [
     id: 1,
     title: "The Ancient Art of Gua Sha",
     excerpt: "Discover how this traditional technique can sculpt your face and calm your mind.",
-    image: "https://images.unsplash.com/photo-1598440947619-2c35fc9b6d40?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1598440947619-2c35fc9b6d40?w=800&auto=format&fit=crop",
     date: "October 12, 2024",
     category: "Rituals"
   },
@@ -118,7 +199,7 @@ export const JOURNAL_POSTS = [
     id: 2,
     title: "Sourcing Wild Rosehip in Patagonia",
     excerpt: "We traveled to the edge of the world to find the most potent source of Vitamin A.",
-    image: "https://images.unsplash.com/photo-1490750967868-58cb75063ed4?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop",
     date: "September 28, 2024",
     category: "Ingredients"
   },
@@ -126,7 +207,7 @@ export const JOURNAL_POSTS = [
     id: 3,
     title: "5 Minutes to Mindfulness",
     excerpt: "Incorporating meditation into your morning skincare routine for a balanced day.",
-    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&auto=format&fit=crop",
     date: "September 15, 2024",
     category: "Wellness"
   }

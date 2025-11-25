@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { JOURNAL_POSTS } from '../constants';
 
 const Journal: React.FC = () => {
@@ -35,11 +36,17 @@ const Journal: React.FC = () => {
                     <p className="text-primary/60 font-light leading-relaxed mb-4">
                         {post.excerpt}
                     </p>
-                    <span className="text-xs uppercase tracking-widest text-primary font-bold border-b border-primary self-start pb-1 group-hover:border-accent group-hover:text-accent transition-colors">
+                    <Link to={`/journal/${post.id}`} className="text-xs uppercase tracking-widest text-primary font-bold border-b border-primary self-start pb-1 group-hover:border-accent group-hover:text-accent transition-colors">
                         Read Story
-                    </span>
+                    </Link>
                 </article>
             ))}
+        </div>
+
+        <div className="mt-20 text-center">
+            <button className="border border-primary text-primary hover:bg-primary hover:text-white transition-colors px-12 py-4 uppercase text-xs tracking-widest">
+                Load More Stories
+            </button>
         </div>
       </div>
     </div>

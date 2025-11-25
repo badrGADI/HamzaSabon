@@ -1,7 +1,8 @@
 import React from 'react';
 import { Product } from '../types';
-import { Plus } from 'lucide-react';
+import { Plus, Star, MessageCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 interface ProductCardProps {
   product: Product;
@@ -9,6 +10,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const navigate = useNavigate();
+  const { addToCart } = useCart();
 
   const handleNavigate = () => {
     navigate(`/product/${product.id}`);
@@ -16,8 +18,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // Logic for adding to cart
-    console.log('Added to cart:', product.name);
+    addToCart(product);
+  };
+
+  const handleWhatsApp = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const message = `Hello, I'm interested in ${product.name}.`;
+    const url = `https://wa.me/212654352802?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
   };
 
   return (
@@ -53,7 +61,30 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <p className="text-primary/60 text-[10px] uppercase tracking-widest font-medium">
             {product.category}
         </p>
-        <span className="text-sm font-medium text-primary mt-1">{product.price}</span>
+        
+        {/* Rating */}
+        {product.rating && (
+            <div className="flex items-center gap-1 my-1">
+                {[...Array(5)].map((_, i) => (
+                    <Star 
+                        key={i} 
+                        size={12} 
+                        className={i < Math.floor(product.rating || 0) ? "fill-accent text-accent" : "text-gray-300"} 
+                    />
+                ))}
+                <span className="text-[10px] text-primary/40 ml-1">({product.rating})</span>
+            </div>
+        )}
+
+        <div className="flex justify-between items-center w-full mt-2">
+            <span className="text-sm font-medium text-primary">${product.price.toFixed(2)}</span>
+            <button 
+                onClick={handleWhatsApp}
+                className="text-[10px] uppercase tracking-widest font-bold text-accent hover:text-primary transition-colors flex items-center gap-1"
+            >
+                Shop Now <MessageCircle size={14} />
+            </button>
+        </div>
       </div>
     </div>
   );

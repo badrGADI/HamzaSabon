@@ -106,7 +106,7 @@ const Home: React.FC = () => {
         </div>
         <div className="relative h-[400px] lg:h-auto order-1 lg:order-2 overflow-hidden">
                 <img 
-                src="https://images.unsplash.com/photo-1575268857798-4288c647a7c3?q=80&w=1200&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=1200&auto=format&fit=crop" 
                 alt="Ritual Setting" 
                 className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-[2s]"
                 />
@@ -117,7 +117,7 @@ const Home: React.FC = () => {
       <section className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
         <div className="relative h-[400px] lg:h-auto overflow-hidden">
                 <img 
-                src="https://images.unsplash.com/photo-1612217118974-548fac06b7dd?q=80&w=1200&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=1200&auto=format&fit=crop" 
                 alt="Oil Application" 
                 className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-[2s]"
                 />
@@ -179,10 +179,10 @@ const Home: React.FC = () => {
             <p className="text-primary/60 mb-12 font-light">Join our community of mindful beauty lovers.</p>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                <img src="https://images.unsplash.com/photo-1597936069379-c0e9b2247494?q=80&w=600&auto=format&fit=crop" alt="Community 1" className="w-full aspect-square object-cover hover:opacity-80 transition cursor-pointer" />
-                <img src="https://images.unsplash.com/photo-1629353696311-d1131ccf87d4?q=80&w=600&auto=format&fit=crop" alt="Community 2" className="w-full aspect-square object-cover hover:opacity-80 transition cursor-pointer" />
-                <img src="https://images.unsplash.com/photo-1596450531853-27dfd331c688?q=80&w=600&auto=format&fit=crop" alt="Community 3" className="w-full aspect-square object-cover hover:opacity-80 transition cursor-pointer" />
-                <img src="https://images.unsplash.com/photo-1556228720-19de75d65243?q=80&w=600&auto=format&fit=crop" alt="Community 4" className="w-full aspect-square object-cover hover:opacity-80 transition cursor-pointer" />
+                <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&auto=format&fit=crop" alt="Community 1" className="w-full aspect-square object-cover hover:opacity-80 transition cursor-pointer" />
+                <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&auto=format&fit=crop" alt="Community 2" className="w-full aspect-square object-cover hover:opacity-80 transition cursor-pointer" />
+                <img src="https://images.unsplash.com/photo-1571875257727-256c39da42af?w=600&auto=format&fit=crop" alt="Community 3" className="w-full aspect-square object-cover hover:opacity-80 transition cursor-pointer" />
+                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop" alt="Community 4" className="w-full aspect-square object-cover hover:opacity-80 transition cursor-pointer" />
             </div>
             </div>
       </section>
