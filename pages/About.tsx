@@ -2,7 +2,7 @@ import React from 'react';
 
 const About: React.FC = () => {
   return (
-    <div className="bg-secondary min-h-screen animate-fade-in">
+    <div className ="bg-secondary min-h-screen animate-fade-in">
       {/* Hero */}
       <div className="relative h-[60vh] w-full overflow-hidden">
         <img 
