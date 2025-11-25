@@ -16,7 +16,7 @@ export interface Translations {
     journal: string;
     contact: string;
   };
-  
+
   // Home Page
   home: {
     heroTitle: string;
@@ -39,7 +39,7 @@ export interface Translations {
     freshFromLab: string;
     joinCommunity: string;
   };
-  
+
   // Product
   product: {
     reviews: string;
@@ -54,7 +54,7 @@ export interface Translations {
     freeShippingDesc: string;
     productDescription: string;
   };
-  
+
   // Cart
   cart: {
     yourCart: string;
@@ -68,7 +68,7 @@ export interface Translations {
     total: string;
     orderViaWhatsApp: string;
   };
-  
+
   // Shop
   shop: {
     all: string;
@@ -76,7 +76,7 @@ export interface Translations {
     noProducts: string;
     tryDifferent: string;
   };
-  
+
   // Footer
   footer: {
     aboutUs: string;
@@ -95,7 +95,7 @@ export interface Translations {
     subscribe: string;
     rights: string;
   };
-  
+
   // WhatsApp Messages
   whatsapp: {
     newOrder: string;
@@ -107,6 +107,28 @@ export interface Translations {
     orderMessage: string;
     orderedProducts: string;
     subtotal: string;
+  };
+
+  // Checkout
+  checkout: {
+    title: string;
+    shippingInfo: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    address: string;
+    city: string;
+    postalCode: string;
+    paymentDetails: string;
+    cardNumber: string;
+    expiry: string;
+    cvc: string;
+    yourOrder: string;
+    placeOrder: string;
+    orderConfirmed: string;
+    thankYou: string;
+    returnHome: string;
+    qty: string;
   };
 }
 
@@ -207,8 +229,28 @@ export const translations: Record<Language, Translations> = {
       orderedProducts: 'Produits commandés',
       subtotal: 'Sous-total',
     },
+    checkout: {
+      title: 'Caisse',
+      shippingInfo: 'Informations de Livraison',
+      email: 'Email',
+      firstName: 'Prénom',
+      lastName: 'Nom',
+      address: 'Adresse',
+      city: 'Ville',
+      postalCode: 'Code Postal',
+      paymentDetails: 'Détails de Paiement',
+      cardNumber: 'Numéro de Carte',
+      expiry: 'Expiration',
+      cvc: 'CVC',
+      yourOrder: 'Votre Commande',
+      placeOrder: 'Passer la Commande',
+      orderConfirmed: 'Commande Confirmée !',
+      thankYou: 'Merci pour votre achat. Nous avons envoyé un email de confirmation avec les détails de votre commande.',
+      returnHome: 'Retour à l\'Accueil',
+      qty: 'Qté',
+    },
   },
-  
+
   // English
   en: {
     nav: {
@@ -305,8 +347,28 @@ export const translations: Record<Language, Translations> = {
       orderedProducts: 'Ordered Products',
       subtotal: 'Subtotal',
     },
+    checkout: {
+      title: 'Checkout',
+      shippingInfo: 'Shipping Information',
+      email: 'Email',
+      firstName: 'First Name',
+      lastName: 'Last Name',
+      address: 'Address',
+      city: 'City',
+      postalCode: 'Postal Code',
+      paymentDetails: 'Payment Details',
+      cardNumber: 'Card Number',
+      expiry: 'Expiry',
+      cvc: 'CVC',
+      yourOrder: 'Your Order',
+      placeOrder: 'Place Order',
+      orderConfirmed: 'Order Confirmed!',
+      thankYou: 'Thank you for your purchase. We\'ve sent a confirmation email with your order details.',
+      returnHome: 'Return Home',
+      qty: 'Qty',
+    },
   },
-  
+
   // Arabic
   ar: {
     nav: {
@@ -402,6 +464,26 @@ export const translations: Record<Language, Translations> = {
       orderMessage: 'أرغب في طلب هذا المنتج. شكراً!',
       orderedProducts: 'المنتجات المطلوبة',
       subtotal: 'المجموع الفرعي',
+    },
+    checkout: {
+      title: 'الدفع',
+      shippingInfo: 'معلومات الشحن',
+      email: 'البريد الإلكتروني',
+      firstName: 'الاسم الأول',
+      lastName: 'اسم العائلة',
+      address: 'العنوان',
+      city: 'المدينة',
+      postalCode: 'الرمز البريدي',
+      paymentDetails: 'تفاصيل الدفع',
+      cardNumber: 'رقم البطاقة',
+      expiry: 'تاريخ الانتهاء',
+      cvc: 'رمز الأمان',
+      yourOrder: 'طلبك',
+      placeOrder: 'إتمام الطلب',
+      orderConfirmed: 'تم تأكيد الطلب!',
+      thankYou: 'شكراً لشرائك. لقد أرسلنا بريداً إلكترونياً لتأكيد تفاصيل طلبك.',
+      returnHome: 'العودة للرئيسية',
+      qty: 'الكمية',
     },
   },
 };
