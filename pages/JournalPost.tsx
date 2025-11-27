@@ -19,6 +19,81 @@ const JournalPost: React.FC = () => {
     );
   }
 
+  // Format content with markdown-style syntax
+  const formatContent = (text: string) => {
+    return text.split('\n\n').map((paragraph, i) => {
+      // Handle headings (with or without #)
+      if (paragraph.startsWith('# ')) {
+        return <h2 key={i} className="font-serif text-3xl text-primary mt-8 mb-4">{paragraph.substring(2)}</h2>;
+      }
+      if (paragraph.startsWith('## ')) {
+        return <h3 key={i} className="font-serif text-2xl text-primary mt-6 mb-3">{paragraph.substring(3)}</h3>;
+      }
+      
+      // Detect headings without # (short lines that look like titles)
+      const lines = paragraph.split('\n');
+      if (lines.length === 1 && paragraph.length < 60 && !paragraph.includes('.') && paragraph === paragraph.trim()) {
+        // Check if it looks like a heading (capitalized, short)
+        if (paragraph[0] === paragraph[0].toUpperCase()) {
+          return <h3 key={i} className="font-serif text-2xl text-primary mt-6 mb-3">{paragraph}</h3>;
+        }
+      }
+      
+      // Handle quotes
+      if (paragraph.startsWith('> ')) {
+        return (
+          <blockquote key={i} className="border-l-4 border-accent pl-6 py-2 my-6 italic text-primary/80">
+            {paragraph.substring(2)}
+          </blockquote>
+        );
+      }
+      
+      // Handle numbered lists (1. 2. 3. etc)
+      if (/^\d+\.\s/.test(paragraph) || paragraph.includes('\n1. ') || paragraph.includes('\n2. ')) {
+        const items = paragraph.split('\n').filter(line => /^\d+\.\s/.test(line.trim()));
+        if (items.length > 0) {
+          return (
+            <ol key={i} className="list-decimal list-inside mb-6 space-y-2 ml-4">
+              {items.map((item, j) => (
+                <li key={j} className="leading-relaxed">{item.replace(/^\d+\.\s/, '')}</li>
+              ))}
+            </ol>
+          );
+        }
+      }
+      
+      // Handle bullet lists (- or •)
+      if (paragraph.includes('\n- ') || paragraph.includes('\n• ') || paragraph.startsWith('- ') || paragraph.startsWith('• ')) {
+        const items = paragraph.split('\n').filter(line => line.trim().startsWith('- ') || line.trim().startsWith('• '));
+        if (items.length > 0) {
+          return (
+            <ul key={i} className="list-disc list-inside mb-6 space-y-2 ml-4">
+              {items.map((item, j) => (
+                <li key={j} className="leading-relaxed">{item.replace(/^[•-]\s/, '').trim()}</li>
+              ))}
+            </ul>
+          );
+        }
+      }
+      
+      // Handle regular paragraphs with inline formatting
+      let formattedText = paragraph;
+      
+      // Bold: **text**
+      formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      
+      // Italic: *text*
+      formattedText = formattedText.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      
+      // Convert line breaks to <br> for multi-line paragraphs
+      formattedText = formattedText.replace(/\n/g, '<br />');
+      
+      return (
+        <p key={i} className="mb-6 leading-relaxed" dangerouslySetInnerHTML={{ __html: formattedText }} />
+      );
+    });
+  };
+
   return (
     <div className="bg-secondary min-h-screen pt-10 pb-24 animate-fade-in">
       <div className="container mx-auto px-6 md:px-12 max-w-4xl">
@@ -38,34 +113,38 @@ const JournalPost: React.FC = () => {
         </div>
 
         <div className="mb-12">
-          <img src={post.image} alt={post.title} className="w-full h-[500px] object-cover" />
+          <img src={post.image} alt={post.title} className="w-full h-[500px] object-cover rounded-lg" />
         </div>
 
         <div className="prose prose-stone prose-lg mx-auto text-primary/80 font-light leading-relaxed">
-          <p className="lead text-xl text-primary font-serif italic mb-8">
+          <p className="lead text-xl text-primary font-serif italic mb-8 border-l-4 border-accent pl-6">
             {post.excerpt}
           </p>
-          <div className="whitespace-pre-wrap">
-            {post.content || (
+          <div className="text-lg">
+            {post.content ? formatContent(post.content) : (
               <>
                 <p className="mb-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-                <p className="mb-6">
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-                <h3 className="font-serif text-2xl text-primary mt-8 mb-4">The Ritual</h3>
-                <p className="mb-6">
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                </p>
-                <blockquote className="border-l-2 border-accent pl-6 py-2 my-8 font-serif text-xl text-primary italic">
-                  "Nature does not hurry, yet everything is accomplished."
-                </blockquote>
-                <p>
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
+                  This article is currently being written. Please check back soon for the full content.
                 </p>
               </>
             )}
+          </div>
+        </div>
+
+        {/* Related Posts */}
+        <div className="mt-20 pt-12 border-t border-primary/10">
+          <h3 className="font-serif text-2xl text-primary mb-8 text-center">Continue Reading</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {journalPosts
+              .filter(p => p.id !== post.id)
+              .slice(0, 2)
+              .map(relatedPost => (
+                <Link key={relatedPost.id} to={`/journal/${relatedPost.id}`} className="group">
+                  <img src={relatedPost.image} alt={relatedPost.title} className="w-full h-48 object-cover rounded mb-4 group-hover:opacity-90 transition" />
+                  <div className="text-xs uppercase tracking-widest text-accent mb-2">{relatedPost.category}</div>
+                  <h4 className="font-serif text-xl text-primary group-hover:text-accent transition">{relatedPost.title}</h4>
+                </Link>
+              ))}
           </div>
         </div>
       </div>

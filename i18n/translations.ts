@@ -26,31 +26,6 @@ export interface Translations {
     vegan: string;
     cleanFormulas: string;
     ethicallySourced: string;
-    curatedForYou: string;
-    theEssentials: string;
-    viewAllProducts: string;
-    ritualOfCalm: string;
-    ritualDescription: string;
-    discoverRitual: string;
-    morningRadiance: string;
-    morningDescription: string;
-    shopSerums: string;
-    justArrived: string;
-    freshFromLab: string;
-    joinCommunity: string;
-  };
-
-  // Product
-  product: {
-    reviews: string;
-    total: string;
-    addToCart: string;
-    orderViaWhatsApp: string;
-    organic: string;
-    organicDesc: string;
-    dermatologistTested: string;
-    dermatologistDesc: string;
-    freeShipping: string;
     freeShippingDesc: string;
     productDescription: string;
   };
@@ -88,6 +63,7 @@ export interface Translations {
     shipping: string;
     returns: string;
     faq: string;
+    privacy: string;
     followUs: string;
     newsletter: string;
     newsletterDesc: string;
@@ -151,8 +127,8 @@ export const translations: Record<Language, Translations> = {
     },
     home: {
       heroTitle: 'La Nature Rencontre la Science',
-      heroSubtitle: 'Découvrez le pouvoir transformateur des plantes sauvages. Luxe durable pour le ritualiste conscient.',
-      shopCollection: 'Voir la Collection',
+      heroSubtitle: 'Soins naturels conçus pour une peau éclatante et saine – sûrs pour tous les types de peau.',
+      shopCollection: 'Acheter Maintenant',
       ourPhilosophy: 'Notre Philosophie',
       vegan: '100% Végétalien',
       cleanFormulas: 'Formules Propres',
@@ -169,6 +145,17 @@ export const translations: Record<Language, Translations> = {
       justArrived: 'Nouveautés',
       freshFromLab: 'Fraîchement du Laboratoire',
       joinCommunity: 'Rejoignez notre communauté d\'amoureux de beauté consciente.',
+      whyNaturvibe: 'Pourquoi Naturvibe ?',
+      whyNaturvibeDesc: 'Chez Naturvibe, nous croyons que les soins de la peau doivent être simples, botaniques et doux. Nos produits sont fabriqués avec des ingrédients à base de plantes, sans produits chimiques agressifs et adaptés à tous les types de peau.',
+      learnMore: 'En Savoir Plus',
+      trust: {
+        botanical: '100% Inspiré par la Botanique',
+        dermatologist: 'Testé Dermatologiquement',
+        delivery: 'Livraison Rapide Partout au Maroc',
+        support: 'Support via WhatsApp',
+      },
+      blogTitle: 'Conseils & Guides de Soins',
+      blogComingSoon: 'Bientôt Disponible',
     },
     product: {
       reviews: 'Avis',
@@ -208,9 +195,10 @@ export const translations: Record<Language, Translations> = {
       careers: 'Carrières',
       customerCare: 'Service Client',
       contactUs: 'Nous Contacter',
-      shipping: 'Livraison',
+      shipping: 'Livraison & Retours',
       returns: 'Retours',
       faq: 'FAQ',
+      privacy: 'Politique de Confidentialité',
       followUs: 'Suivez-nous',
       newsletter: 'Newsletter',
       newsletterDesc: 'Recevez les dernières nouvelles et offres exclusives.',
@@ -269,8 +257,8 @@ export const translations: Record<Language, Translations> = {
     },
     home: {
       heroTitle: 'Nature Meets Science',
-      heroSubtitle: 'Experience the transformative power of wild-crafted botanicals. Sustainable luxury for the mindful ritualist.',
-      shopCollection: 'Shop Collection',
+      heroSubtitle: 'Natural skincare crafted for glowing, healthy skin – safe for all skin types.',
+      shopCollection: 'Shop Now',
       ourPhilosophy: 'Our Philosophy',
       vegan: '100% Vegan',
       cleanFormulas: 'Clean Formulas',
@@ -287,6 +275,17 @@ export const translations: Record<Language, Translations> = {
       justArrived: 'Just Arrived',
       freshFromLab: 'Fresh From The Lab',
       joinCommunity: 'Join our community of mindful beauty lovers.',
+      whyNaturvibe: 'Why Naturvibe?',
+      whyNaturvibeDesc: 'At Naturvibe, we believe skincare should be simple, botanical, and gentle. Our products are crafted with plant-based ingredients, free from harsh chemicals, and suitable for all skin types.',
+      learnMore: 'Learn More',
+      trust: {
+        botanical: '100% Botanical Inspired',
+        dermatologist: 'Dermatologically Tested',
+        delivery: 'Fast Delivery Across Morocco',
+        support: 'Support via WhatsApp',
+      },
+      blogTitle: 'Skincare Tips & Guides',
+      blogComingSoon: 'Coming Soon',
     },
     product: {
       reviews: 'Reviews',
@@ -326,9 +325,10 @@ export const translations: Record<Language, Translations> = {
       careers: 'Careers',
       customerCare: 'Customer Care',
       contactUs: 'Contact Us',
-      shipping: 'Shipping',
+      shipping: 'Shipping & Returns',
       returns: 'Returns',
       faq: 'FAQ',
+      privacy: 'Privacy Policy',
       followUs: 'Follow Us',
       newsletter: 'Newsletter',
       newsletterDesc: 'Get the latest news and exclusive offers.',
@@ -387,8 +387,8 @@ export const translations: Record<Language, Translations> = {
     },
     home: {
       heroTitle: 'الطبيعة تلتقي بالعلم',
-      heroSubtitle: 'اكتشف القوة التحويلية للنباتات البرية. رفاهية مستدامة للممارس الواعي.',
-      shopCollection: 'تسوق المجموعة',
+      heroSubtitle: 'عناية طبيعية بالبشرة مصممة لبشرة مشرقة وصحية - آمنة لجميع أنواع البشرة.',
+      shopCollection: 'تسوق الآن',
       ourPhilosophy: 'فلسفتنا',
       vegan: '100% نباتي',
       cleanFormulas: 'تركيبات نظيفة',
@@ -405,6 +405,17 @@ export const translations: Record<Language, Translations> = {
       justArrived: 'وصل حديثاً',
       freshFromLab: 'طازج من المختبر',
       joinCommunity: 'انضم إلى مجتمعنا من محبي الجمال الواعي.',
+      whyNaturvibe: 'لماذا Naturvibe؟',
+      whyNaturvibeDesc: 'في Naturvibe، نؤمن بأن العناية بالبشرة يجب أن تكون بسيطة، نباتية، ولطيفة. منتجاتنا مصنوعة من مكونات نباتية، خالية من المواد الكيميائية القاسية، ومناسبة لجميع أنواع البشرة.',
+      learnMore: 'اعرف المزيد',
+      trust: {
+        botanical: '100% مستوحى من الطبيعة',
+        dermatologist: 'مختبر من قبل أطباء الجلد',
+        delivery: 'توصيل سريع في جميع أنحاء المغرب',
+        support: 'دعم عبر واتساب',
+      },
+      blogTitle: 'نصائح وأدلة العناية بالبشرة',
+      blogComingSoon: 'قريباً',
     },
     product: {
       reviews: 'تقييمات',
@@ -444,9 +455,10 @@ export const translations: Record<Language, Translations> = {
       careers: 'الوظائف',
       customerCare: 'خدمة العملاء',
       contactUs: 'اتصل بنا',
-      shipping: 'الشحن',
+      shipping: 'الشحن والإرجاع',
       returns: 'المرتجعات',
       faq: 'الأسئلة الشائعة',
+      privacy: 'سياسة الخصوصية',
       followUs: 'تابعنا',
       newsletter: 'النشرة الإخبارية',
       newsletterDesc: 'احصل على آخر الأخبار والعروض الحصرية.',

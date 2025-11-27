@@ -1,4 +1,4 @@
-import { Product, PressReview, NavItem } from './types';
+import { Product, PressReview, UserReview, NavItem } from './types';
 
 export const PROMO_MESSAGES = [
   "Complimentary botanical travel kit on orders over $150",
@@ -34,8 +34,19 @@ export const PRODUCTS: Product[] = [
     category: "Skincare",
     price: 85.00,
     rating: 4.9,
-    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop",
-    tag: "Best Seller"
+    images: [
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?w=800&auto=format&fit=crop"
+    ],
+    tag: "Best Seller",
+    shortDescription: "Regenerating night serum for tired skin.",
+    benefits: [
+      "Calms redness and irritation",
+      "Provides long-lasting hydration",
+      "Absorbs quickly without stickiness"
+    ],
+    howToUse: "Apply a small amount to clean, dry skin morning and night. Gently massage until fully absorbed.",
+    ingredients: "Aqua, Aloe Barbadensis Leaf Juice, Glycerin, Hyaluronic Acid, Chamomilla Recutita Flower Extract."
   },
   {
     id: 12,
@@ -43,8 +54,19 @@ export const PRODUCTS: Product[] = [
     category: "Skincare",
     price: 65.00,
     rating: 4.7,
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop",
-    tag: "Trending"
+    images: [
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1571875257727-256c39da42af?w=800&auto=format&fit=crop"
+    ],
+    tag: "Trending",
+    shortDescription: "Deep hydration for a radiant glow.",
+    benefits: [
+      "Intense moisture boost",
+      "Restores skin barrier",
+      "Leaves skin glowing"
+    ],
+    howToUse: "Apply generously to face and neck after cleansing.",
+    ingredients: "Aqua, Shea Butter, Jojoba Oil, Vitamin E, Rose Extract."
   },
   {
     id: 13,
@@ -52,7 +74,18 @@ export const PRODUCTS: Product[] = [
     category: "Skincare",
     price: 38.00,
     rating: 4.6,
-    image: "https://images.unsplash.com/photo-1571875257727-256c39da42af?w=800&auto=format&fit=crop"
+    images: [
+      "https://images.unsplash.com/photo-1571875257727-256c39da42af?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop"
+    ],
+    shortDescription: "Refreshing toner with botanical extracts.",
+    benefits: [
+      "Balances skin pH",
+      "Tightens pores",
+      "Refreshes and hydrates"
+    ],
+    howToUse: "Soak a cotton pad and gently wipe over face and neck.",
+    ingredients: "Rose Water, Witch Hazel, Aloe Vera, Cucumber Extract."
   },
   {
     id: 14,
@@ -60,7 +93,18 @@ export const PRODUCTS: Product[] = [
     category: "Skincare",
     price: 55.00,
     rating: 4.8,
-    image: "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?w=800&auto=format&fit=crop"
+    images: [
+      "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop"
+    ],
+    shortDescription: "Purifying clay mask for deep cleansing.",
+    benefits: [
+      "Detoxifies skin",
+      "Unclogs pores",
+      "Controls oil"
+    ],
+    howToUse: "Apply a thin layer to face, leave for 10-15 minutes, then rinse.",
+    ingredients: "Kaolin Clay, Bentonite Clay, Activated Charcoal, Tea Tree Oil."
   },
 
   // Savon (Soaps)
@@ -70,8 +114,19 @@ export const PRODUCTS: Product[] = [
     category: "Savon",
     price: 15.00,
     rating: 4.8,
-    image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&auto=format&fit=crop",
-    tag: "Best Seller"
+    images: [
+      "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&auto=format&fit=crop"
+    ],
+    tag: "Best Seller",
+    shortDescription: "Traditional Moroccan black soap.",
+    benefits: [
+      "Exfoliates dead skin cells",
+      "Softens skin",
+      "Prepares skin for scrubbing"
+    ],
+    howToUse: "Apply to wet skin in a warm bath or shower. Leave for 5-10 minutes, then rinse and scrub with a kessa glove.",
+    ingredients: "Olive Oil, Macerated Olives, Water, Potassium Hydroxide."
   },
   {
     id: 2,
@@ -79,7 +134,18 @@ export const PRODUCTS: Product[] = [
     category: "Savon",
     price: 12.00,
     rating: 4.5,
-    image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&auto=format&fit=crop"
+    images: [
+      "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop"
+    ],
+    shortDescription: "Soothing lavender and shea butter soap.",
+    benefits: [
+      "Gentle cleansing",
+      "Moisturizing",
+      "Calming scent"
+    ],
+    howToUse: "Lather with water and apply to body. Rinse thoroughly.",
+    ingredients: "Shea Butter, Coconut Oil, Lavender Essential Oil, Olive Oil."
   },
   
   // Shampo (Shampoos)
@@ -89,8 +155,19 @@ export const PRODUCTS: Product[] = [
     category: "Shampo",
     price: 25.00,
     rating: 4.7,
-    image: "https://images.unsplash.com/photo-1571875257727-256c39da42af?w=800&auto=format&fit=crop",
-    isNew: true
+    images: [
+      "https://images.unsplash.com/photo-1571875257727-256c39da42af?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=800&auto=format&fit=crop"
+    ],
+    isNew: true,
+    shortDescription: "Revitalizing argan oil shampoo.",
+    benefits: [
+      "Strengthens hair",
+      "Adds shine",
+      "Nourishes scalp"
+    ],
+    howToUse: "Massage into wet hair and scalp. Rinse well.",
+    ingredients: "Argan Oil, Aloe Vera, Hydrolyzed Wheat Protein, Rosemary Extract."
   },
   {
     id: 4,
@@ -98,7 +175,18 @@ export const PRODUCTS: Product[] = [
     category: "Shampo",
     price: 18.00,
     rating: 4.6,
-    image: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=800&auto=format&fit=crop"
+    images: [
+      "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1571875257727-256c39da42af?w=800&auto=format&fit=crop"
+    ],
+    shortDescription: "Solid nettle shampoo for oily hair.",
+    benefits: [
+      "Regulates sebum",
+      "Reduces dandruff",
+      "Eco-friendly packaging"
+    ],
+    howToUse: "Rub bar directly onto wet hair to lather. Rinse thoroughly.",
+    ingredients: "Nettle Powder, Green Clay, Coconut Oil, Peppermint Oil."
   },
 
   // Bomada (Pomades/Balms)
@@ -108,8 +196,19 @@ export const PRODUCTS: Product[] = [
     category: "Bomada",
     price: 30.00,
     rating: 4.9,
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop",
-    tag: "Trending"
+    images: [
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?w=800&auto=format&fit=crop"
+    ],
+    tag: "Trending",
+    shortDescription: "Healing balm for dry and damaged skin.",
+    benefits: [
+      "Accelerates healing",
+      "Soothes irritation",
+      "Protects skin barrier"
+    ],
+    howToUse: "Apply to affected areas as needed.",
+    ingredients: "Calendula Oil, Beeswax, Lavender Oil, Vitamin E."
   },
   {
     id: 6,
@@ -117,7 +216,18 @@ export const PRODUCTS: Product[] = [
     category: "Bomada",
     price: 28.00,
     rating: 4.8,
-    image: "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?w=800&auto=format&fit=crop"
+    images: [
+      "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop"
+    ],
+    shortDescription: "Intense hydration balm for all skin types.",
+    benefits: [
+      "Deeply moisturizes",
+      "Softens rough patches",
+      "Long-lasting protection"
+    ],
+    howToUse: "Massage into dry skin areas until absorbed.",
+    ingredients: "Cocoa Butter, Sweet Almond Oil, Beeswax, Vanilla Extract."
   },
 
   // Oil (Oils)
@@ -127,8 +237,19 @@ export const PRODUCTS: Product[] = [
     category: "Oil",
     price: 45.00,
     rating: 5.0,
-    image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop",
-    tag: "Premium"
+    images: [
+      "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop"
+    ],
+    tag: "Premium",
+    shortDescription: "100% pure organic argan oil.",
+    benefits: [
+      "Anti-aging properties",
+      "Deep hydration",
+      "Versatile use (hair, skin, nails)"
+    ],
+    howToUse: "Apply a few drops to face, hair, or body.",
+    ingredients: "100% Organic Argania Spinosa Kernel Oil."
   },
   {
     id: 8,
@@ -136,7 +257,18 @@ export const PRODUCTS: Product[] = [
     category: "Oil",
     price: 55.00,
     rating: 4.9,
-    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop"
+    images: [
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop"
+    ],
+    shortDescription: "Anti-aging prickly pear seed oil.",
+    benefits: [
+      "Reduces fine lines",
+      "Brightens dark circles",
+      "Tightens pores"
+    ],
+    howToUse: "Apply 2-3 drops to face and neck at night.",
+    ingredients: "100% Organic Opuntia Ficus-Indica Seed Oil."
   },
 
   // Packs (Gift Sets)
@@ -146,8 +278,19 @@ export const PRODUCTS: Product[] = [
     category: "Packs",
     price: 85.00,
     rating: 5.0,
-    image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&auto=format&fit=crop",
-    tag: "Gift Set"
+    images: [
+      "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1571781535009-2b948dee3183?w=800&auto=format&fit=crop"
+    ],
+    tag: "Gift Set",
+    shortDescription: "Complete Hammam ritual set.",
+    benefits: [
+      "Spa experience at home",
+      "Detoxifying and relaxing",
+      "Complete body care"
+    ],
+    howToUse: "Follow the included guide for a traditional Hammam ritual.",
+    ingredients: "Contains: Savon Noir, Kessa Glove, Ghassoul Clay, Argan Oil."
   },
   {
     id: 10,
@@ -155,7 +298,39 @@ export const PRODUCTS: Product[] = [
     category: "Packs",
     price: 65.00,
     rating: 4.7,
-    image: "https://images.unsplash.com/photo-1571781535009-2b948dee3183?w=800&auto=format&fit=crop"
+    images: [
+      "https://images.unsplash.com/photo-1571781535009-2b948dee3183?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&auto=format&fit=crop"
+    ],
+    shortDescription: "Facial care discovery set.",
+    benefits: [
+      "Complete facial routine",
+      "Travel-friendly sizes",
+      "Great for gifting"
+    ],
+    howToUse: "Follow the step-by-step guide included in the box.",
+    ingredients: "Contains: Cleanser, Toner, Serum, Moisturizer."
+  }
+];
+
+export const USER_REVIEWS: UserReview[] = [
+  {
+    id: 1,
+    name: "Sara M.",
+    rating: 5,
+    comment: "My skin improved in just 2 weeks! The Midnight Serum is a miracle worker."
+  },
+  {
+    id: 2,
+    name: "Amine K.",
+    rating: 5,
+    comment: "Lightweight and soothing. Perfect for my sensitive skin. Highly recommend!"
+  },
+  {
+    id: 3,
+    name: "Leila B.",
+    rating: 4,
+    comment: "Fast delivery and beautiful packaging. The products smell amazing."
   }
 ];
 

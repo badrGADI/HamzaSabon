@@ -32,7 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div onClick={handleNavigate} className="group cursor-pointer flex flex-col h-full">
       <div className="relative aspect-[3/4] bg-[#F0ECE4] overflow-hidden mb-5">
         <img 
-          src={product.image} 
+          src={product.images[0]} 
           alt={product.name} 
           loading="lazy"
           className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -58,8 +58,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <h3 className="font-serif text-lg text-primary group-hover:text-accent transition-colors duration-300">
             {product.name}
         </h3>
-        <p className="text-primary/60 text-[10px] uppercase tracking-widest font-medium">
-            {product.category}
+        <p className="text-primary/60 text-[10px] uppercase tracking-widest font-medium line-clamp-1">
+            {product.shortDescription || product.category}
         </p>
         
         {/* Rating */}
@@ -77,7 +77,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         )}
 
         <div className="flex justify-between items-center w-full mt-2">
-            <span className="text-sm font-medium text-primary">${product.price.toFixed(2)}</span>
+            <span className="text-sm font-medium text-primary">{product.price.toFixed(2)} DH</span>
             <button 
                 onClick={handleWhatsApp}
                 className="text-[10px] uppercase tracking-widest font-bold text-accent hover:text-primary transition-colors flex items-center gap-1"

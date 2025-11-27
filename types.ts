@@ -4,21 +4,20 @@ export interface Product {
   category: string;
   price: number;
   rating?: number;
-  image: string;
+  images: string[]; // Changed from image: string to images: string[]
   tag?: string; // e.g., "Meilleure Vente", "Rupture de Stock"
   isNew?: boolean;
+  shortDescription?: string;
+  benefits?: string[];
+  howToUse?: string;
+  ingredients?: string;
 }
 
-export interface PressReview {
-export interface Product {
+export interface UserReview {
   id: number;
   name: string;
-  category: string;
-  price: number;
-  rating?: number;
-  image: string;
-  tag?: string; // e.g., "Meilleure Vente", "Rupture de Stock"
-  isNew?: boolean;
+  rating: number;
+  comment: string;
 }
 
 export interface PressReview {

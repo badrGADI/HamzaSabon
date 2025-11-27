@@ -71,8 +71,10 @@ const Footer: React.FC = () => {
 
                     <div className="flex space-x-6">
                         <a href="#" className="text-secondary hover:text-accent transition"><Instagram size={20} strokeWidth={1.5} /></a>
+                        <a href="#" className="text-secondary hover:text-accent transition">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-tiktok"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+                        </a>
                         <a href="#" className="text-secondary hover:text-accent transition"><Facebook size={20} strokeWidth={1.5} /></a>
-                        <a href="#" className="text-secondary hover:text-accent transition"><Twitter size={20} strokeWidth={1.5} /></a>
                     </div>
                 </div>
             </div>

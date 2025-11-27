@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
-import { REVIEWS } from '../constants';
+import { REVIEWS, USER_REVIEWS } from '../constants';
 import ProductCard from '../components/ProductCard';
-import { ArrowRight, Star, Leaf, Droplets, Sun } from 'lucide-react';
+import { ArrowRight, Star, Leaf, Droplets, Sun, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Home: React.FC = () => {
-    const { products, journalPosts } = useData();
+    const { products } = useData();
     const { t } = useLanguage();
 
     // Get featured products (e.g., first 4 or marked as best seller)
@@ -73,6 +73,19 @@ const Home: React.FC = () => {
                             <span className="text-xs uppercase tracking-widest font-medium">{t.home.ethicallySourced}</span>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            {/* Why Naturvibe Section */}
+            <section className="py-20 bg-[#F5F5F0]">
+                <div className="container mx-auto px-6 text-center max-w-3xl">
+                    <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">{t.home.whyNaturvibe}</h2>
+                    <p className="text-primary/70 text-lg leading-relaxed mb-8 font-light">
+                        {t.home.whyNaturvibeDesc}
+                    </p>
+                    <Link to="/about" className="inline-block border-b border-primary text-primary uppercase text-xs tracking-widest pb-1 hover:text-accent hover:border-accent transition-colors">
+                        {t.home.learnMore}
+                    </Link>
                 </div>
             </section>
 
@@ -159,41 +172,72 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
-            {/* Testimonials */}
+            {/* User Reviews */}
             <section className="py-24 bg-[#F0ECE4]">
-                <div className="container mx-auto px-6 md:px-12">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {REVIEWS.map(review => (
-                            <div key={review.id} className="bg-secondary p-10 hover:-translate-y-2 transition-transform duration-300 shadow-sm border border-primary/5">
-                                <div className="flex text-accent mb-6">
-                                    {[...Array(5)].map((_, i) => (
-                                        <Star key={i} size={12} fill="currentColor" />
+                <div className="container mx-auto px-6 md:px-12 text-center">
+                    <h2 className="font-serif text-3xl md:text-4xl text-primary mb-12">Loved by our Community</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {USER_REVIEWS.map(review => (
+                            <div key={review.id} className="bg-white p-8 shadow-sm border border-primary/5 flex flex-col items-center">
+                                <div className="flex text-accent mb-4">
+                                    {[...Array(review.rating)].map((_, i) => (
+                                        <Star key={i} size={14} fill="currentColor" />
                                     ))}
                                 </div>
-                                <p className="font-serif text-lg text-primary mb-6 leading-relaxed">"{review.quote}"</p>
-                                <div className="flex items-center gap-3 border-t border-primary/10 pt-4">
-                                    <span className="text-xs font-bold uppercase tracking-widest text-primary">
-                                        {review.source}
-                                    </span>
-                                </div>
+                                <p className="font-serif text-lg text-primary mb-6 leading-relaxed italic">"{review.comment}"</p>
+                                <span className="text-xs font-bold uppercase tracking-widest text-primary/60">
+                                    — {review.name}
+                                </span>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Instagram Feed / Community */}
-            <section className="py-20 bg-secondary">
+            {/* Blog / Tips Placeholder */}
+            <section className="py-16 bg-white border-t border-primary/5">
                 <div className="container mx-auto px-6 text-center">
-                    <h2 className="font-serif text-3xl text-primary mb-3">@naturvibe.official</h2>
-                    <p className="text-primary/60 mb-12 font-light">{t.home.joinCommunity}</p>
+                    <h2 className="font-serif text-3xl text-primary mb-2">{t.home.blogTitle}</h2>
+                    <p className="text-primary/50 text-sm uppercase tracking-widest">{t.home.blogComingSoon}</p>
+                </div>
+            </section>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                        <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&auto=format&fit=crop" alt="Community 1" className="w-full aspect-square object-cover hover:opacity-80 transition cursor-pointer" />
-                        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&auto=format&fit=crop" alt="Community 2" className="w-full aspect-square object-cover hover:opacity-80 transition cursor-pointer" />
-                        <img src="https://images.unsplash.com/photo-1571875257727-256c39da42af?w=600&auto=format&fit=crop" alt="Community 3" className="w-full aspect-square object-cover hover:opacity-80 transition cursor-pointer" />
-                        <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop" alt="Community 4" className="w-full aspect-square object-cover hover:opacity-80 transition cursor-pointer" />
+            {/* Trust Section */}
+            <section className="py-12 bg-secondary border-t border-primary/5">
+                <div className="container mx-auto px-6">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        <div className="flex flex-col items-center gap-3">
+                            <Leaf className="text-accent" size={24} strokeWidth={1} />
+                            <span className="text-xs uppercase tracking-widest font-medium text-primary/80">{t.home.trust.botanical}</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-3">
+                            <div className="p-1 border border-accent rounded-full">
+                                <span className="block w-4 h-4 bg-accent rounded-full"></span>
+                            </div>
+                            <span className="text-xs uppercase tracking-widest font-medium text-primary/80">{t.home.trust.dermatologist}</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-3">
+                            <Sun className="text-accent" size={24} strokeWidth={1} />
+                            <span className="text-xs uppercase tracking-widest font-medium text-primary/80">{t.home.trust.delivery}</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-3">
+                            <MessageCircle className="text-accent" size={24} strokeWidth={1} />
+                            <span className="text-xs uppercase tracking-widest font-medium text-primary/80">{t.home.trust.support}</span>
+                        </div>
                     </div>
+                </div>
+            </section>
+
+            {/* Final CTA */}
+            <section className="py-20 bg-primary text-secondary text-center">
+                <div className="container mx-auto px-6">
+                    <h2 className="font-serif text-4xl md:text-5xl mb-6">Ready to Glow?</h2>
+                    <p className="text-secondary/70 text-lg mb-10 max-w-xl mx-auto font-light">
+                        Join thousands of others who have transformed their skin with Naturvibe.
+                    </p>
+                    <Link to="/shop" className="inline-block bg-accent text-white px-10 py-4 uppercase text-xs tracking-widest hover:bg-white hover:text-primary transition-colors duration-300">
+                        Shop Now
+                    </Link>
                 </div>
             </section>
         </div>

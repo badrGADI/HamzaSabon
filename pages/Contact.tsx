@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import { useData } from '../context/DataContext';
 
 const Contact: React.FC = () => {
   return (
@@ -71,43 +72,123 @@ const Contact: React.FC = () => {
 
             {/* Form */}
             <div className="bg-white p-8 md:p-12 shadow-sm border border-primary/5">
-                <form className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label className="block text-xs uppercase tracking-widest text-primary mb-2">First Name</label>
-                            <input type="text" className="w-full border-b border-primary/20 py-2 focus:outline-none focus:border-accent bg-transparent transition-colors" />
-                        </div>
-                        <div>
-                            <label className="block text-xs uppercase tracking-widest text-primary mb-2">Last Name</label>
-                            <input type="text" className="w-full border-b border-primary/20 py-2 focus:outline-none focus:border-accent bg-transparent transition-colors" />
-                        </div>
-                    </div>
-                    <div>
-                        <label className="block text-xs uppercase tracking-widest text-primary mb-2">Email Address</label>
-                        <input type="email" className="w-full border-b border-primary/20 py-2 focus:outline-none focus:border-accent bg-transparent transition-colors" />
-                    </div>
-                    <div>
-                        <label className="block text-xs uppercase tracking-widest text-primary mb-2">Subject</label>
-                        <select className="w-full border-b border-primary/20 py-2 focus:outline-none focus:border-accent bg-transparent transition-colors">
-                            <option>General Inquiry</option>
-                            <option>Order Support</option>
-                            <option>Wholesale</option>
-                            <option>Press</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label className="block text-xs uppercase tracking-widest text-primary mb-2">Message</label>
-                        <textarea rows={4} className="w-full border-b border-primary/20 py-2 focus:outline-none focus:border-accent bg-transparent transition-colors resize-none"></textarea>
-                    </div>
-                    <button type="submit" className="w-full bg-primary text-white py-4 uppercase text-xs tracking-widest hover:bg-accent transition-colors flex items-center justify-center gap-2">
-                        Send Message <Send size={14} />
-                    </button>
-                </form>
+                <ContactForm />
             </div>
         </div>
       </div>
     </div>
   );
+};
+
+const ContactForm: React.FC = () => {
+    const { sendMessage } = useData();
+    const [status, setStatus] = React.useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [formData, setFormData] = React.useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        subject: 'General Inquiry',
+        message: ''
+    });
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus('loading');
+        try {
+            await sendMessage(formData);
+            setStatus('success');
+            setFormData({ firstName: '', lastName: '', email: '', subject: 'General Inquiry', message: '' });
+        } catch (error) {
+            setStatus('error');
+        }
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    if (status === 'success') {
+        return (
+            <div className="text-center py-12">
+                <h3 className="text-2xl font-serif text-primary mb-4">Thank You!</h3>
+                <p className="text-primary/70 mb-6">Your message has been sent successfully. We'll get back to you soon.</p>
+                <button onClick={() => setStatus('idle')} className="text-accent hover:text-primary underline">Send another message</button>
+            </div>
+        );
+    }
+
+    return (
+        <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label className="block text-xs uppercase tracking-widest text-primary mb-2">First Name</label>
+                    <input 
+                        required 
+                        name="firstName" 
+                        value={formData.firstName} 
+                        onChange={handleChange} 
+                        type="text" 
+                        className="w-full border-b border-primary/20 py-2 focus:outline-none focus:border-accent bg-transparent transition-colors" 
+                    />
+                </div>
+                <div>
+                    <label className="block text-xs uppercase tracking-widest text-primary mb-2">Last Name</label>
+                    <input 
+                        required 
+                        name="lastName" 
+                        value={formData.lastName} 
+                        onChange={handleChange} 
+                        type="text" 
+                        className="w-full border-b border-primary/20 py-2 focus:outline-none focus:border-accent bg-transparent transition-colors" 
+                    />
+                </div>
+            </div>
+            <div>
+                <label className="block text-xs uppercase tracking-widest text-primary mb-2">Email Address</label>
+                <input 
+                    required 
+                    name="email" 
+                    value={formData.email} 
+                    onChange={handleChange} 
+                    type="email" 
+                    className="w-full border-b border-primary/20 py-2 focus:outline-none focus:border-accent bg-transparent transition-colors" 
+                />
+            </div>
+            <div>
+                <label className="block text-xs uppercase tracking-widest text-primary mb-2">Subject</label>
+                <select 
+                    name="subject" 
+                    value={formData.subject} 
+                    onChange={handleChange} 
+                    className="w-full border-b border-primary/20 py-2 focus:outline-none focus:border-accent bg-transparent transition-colors"
+                >
+                    <option>General Inquiry</option>
+                    <option>Order Support</option>
+                    <option>Wholesale</option>
+                    <option>Press</option>
+                </select>
+            </div>
+            <div>
+                <label className="block text-xs uppercase tracking-widest text-primary mb-2">Message</label>
+                <textarea 
+                    required 
+                    name="message" 
+                    value={formData.message} 
+                    onChange={handleChange} 
+                    rows={4} 
+                    className="w-full border-b border-primary/20 py-2 focus:outline-none focus:border-accent bg-transparent transition-colors resize-none"
+                ></textarea>
+            </div>
+            <button 
+                type="submit" 
+                disabled={status === 'loading'}
+                className="w-full bg-primary text-white py-4 uppercase text-xs tracking-widest hover:bg-accent transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+            >
+                {status === 'loading' ? 'Sending...' : 'Send Message'} <Send size={14} />
+            </button>
+            {status === 'error' && <p className="text-red-500 text-sm text-center">Something went wrong. Please try again.</p>}
+        </form>
+    );
 };
 
 export default Contact;

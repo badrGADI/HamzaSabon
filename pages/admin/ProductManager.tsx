@@ -4,30 +4,75 @@ import { Product } from '../../types';
 import { Plus, Edit, Trash2, X, Save } from 'lucide-react';
 
 const ProductManager: React.FC = () => {
-    const { products, addProduct, updateProduct, deleteProduct } = useData();
+    const { products, addProduct, updateProduct, deleteProduct, uploadImage } = useData();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingId, setEditingId] = useState<number | null>(null);
+    const [uploading, setUploading] = useState(false);
 
     const initialFormState: Omit<Product, 'id'> = {
         name: '',
         category: 'Skincare',
         price: 0,
-        image: '',
+        images: [],
         rating: 5,
         tag: '',
-        isNew: false
+        isNew: false,
+        shortDescription: '',
+        benefits: [],
+        howToUse: '',
+        ingredients: ''
     };
 
     const [formData, setFormData] = useState(initialFormState);
+    const [benefitsText, setBenefitsText] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        // Process text areas into arrays
+        const processedData = {
+            ...formData,
+            benefits: benefitsText.split('\n').filter(b => b.trim() !== '')
+        };
+
         if (editingId) {
-            updateProduct(editingId, formData);
+            await updateProduct(editingId, processedData);
         } else {
-            addProduct(formData);
+            await addProduct(processedData);
         }
         closeModal();
+    };
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files || e.target.files.length === 0) return;
+        
+        setUploading(true);
+        const newImages: string[] = [];
+        
+        try {
+            for (let i = 0; i < e.target.files.length; i++) {
+                const file = e.target.files[i];
+                const url = await uploadImage(file);
+                if (url) newImages.push(url);
+            }
+            
+            setFormData(prev => ({
+                ...prev,
+                images: [...(prev.images || []), ...newImages]
+            }));
+        } catch (error) {
+            console.error("Upload failed", error);
+            alert("Failed to upload images");
+        } finally {
+            setUploading(false);
+        }
+    };
+
+    const removeImage = (indexToRemove: number) => {
+        setFormData(prev => ({
+            ...prev,
+            images: (prev.images || []).filter((_, index) => index !== indexToRemove)
+        }));
     };
 
     const openModal = (product?: Product) => {
@@ -37,14 +82,20 @@ const ProductManager: React.FC = () => {
                 name: product.name,
                 category: product.category,
                 price: product.price,
-                image: product.image,
+                images: product.images || [],
                 rating: product.rating || 5,
                 tag: product.tag || '',
-                isNew: product.isNew || false
+                isNew: product.isNew || false,
+                shortDescription: product.shortDescription || '',
+                benefits: product.benefits || [],
+                howToUse: product.howToUse || '',
+                ingredients: product.ingredients || ''
             });
+            setBenefitsText((product.benefits || []).join('\n'));
         } else {
             setEditingId(null);
             setFormData(initialFormState);
+            setBenefitsText('');
         }
         setIsModalOpen(true);
     };
@@ -53,6 +104,7 @@ const ProductManager: React.FC = () => {
         setIsModalOpen(false);
         setEditingId(null);
         setFormData(initialFormState);
+        setBenefitsText('');
     };
 
     const handleDelete = (id: number) => {
@@ -89,7 +141,11 @@ const ProductManager: React.FC = () => {
                         {products.map(product => (
                             <tr key={product.id} className="hover:bg-gray-50">
                                 <td className="p-4">
-                                    <img src={product.image} alt={product.name} className="w-12 h-12 object-cover rounded" />
+                                    <img 
+                                        src={product.images && product.images.length > 0 ? product.images[0] : ''} 
+                                        alt={product.name} 
+                                        className="w-12 h-12 object-cover rounded" 
+                                    />
                                 </td>
                                 <td className="p-4 font-medium">{product.name}</td>
                                 <td className="p-4 text-gray-500">{product.category}</td>
@@ -157,16 +213,6 @@ const ProductManager: React.FC = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">Image URL</label>
-                                    <input
-                                        type="url"
-                                        required
-                                        value={formData.image}
-                                        onChange={e => setFormData({ ...formData, image: e.target.value })}
-                                        className="w-full border rounded p-2"
-                                    />
-                                </div>
-                                <div>
                                     <label className="block text-sm font-medium mb-1">Tag (Optional)</label>
                                     <input
                                         type="text"
@@ -176,22 +222,104 @@ const ProductManager: React.FC = () => {
                                         placeholder="e.g., Best Seller"
                                     />
                                 </div>
-                                <div className="flex items-center gap-2 pt-6">
+                            </div>
+
+                            {/* Image Upload */}
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Product Images</label>
+                                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:bg-gray-50 transition">
                                     <input
-                                        type="checkbox"
-                                        id="isNew"
-                                        checked={formData.isNew}
-                                        onChange={e => setFormData({ ...formData, isNew: e.target.checked })}
-                                        className="w-4 h-4"
+                                        type="file"
+                                        multiple
+                                        accept="image/*"
+                                        onChange={handleImageUpload}
+                                        className="hidden"
+                                        id="image-upload"
+                                        disabled={uploading}
                                     />
-                                    <label htmlFor="isNew" className="text-sm font-medium">Mark as New Arrival</label>
+                                    <label htmlFor="image-upload" className="cursor-pointer flex flex-col items-center gap-2">
+                                        <Plus className="text-gray-400" size={24} />
+                                        <span className="text-sm text-gray-500">
+                                            {uploading ? 'Uploading...' : 'Click to upload images'}
+                                        </span>
+                                    </label>
                                 </div>
+                                
+                                {/* Image Previews */}
+                                {formData.images && formData.images.length > 0 && (
+                                    <div className="grid grid-cols-4 gap-2 mt-4">
+                                        {formData.images.map((img, index) => (
+                                            <div key={index} className="relative aspect-square group">
+                                                <img src={img} alt={`Preview ${index}`} className="w-full h-full object-cover rounded border" />
+                                                <button
+                                                    type="button"
+                                                    onClick={() => removeImage(index)}
+                                                    className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition"
+                                                >
+                                                    <X size={12} />
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Short Description (One-liner)</label>
+                                <input
+                                    type="text"
+                                    value={formData.shortDescription}
+                                    onChange={e => setFormData({ ...formData, shortDescription: e.target.value })}
+                                    className="w-full border rounded p-2"
+                                    placeholder="A brief summary of the product..."
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Benefits (One per line)</label>
+                                <textarea
+                                    value={benefitsText}
+                                    onChange={e => setBenefitsText(e.target.value)}
+                                    className="w-full border rounded p-2 h-24"
+                                    placeholder="Hydrates skin&#10;Reduces redness&#10;Anti-aging properties"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium mb-1">How to Use</label>
+                                <textarea
+                                    value={formData.howToUse}
+                                    onChange={e => setFormData({ ...formData, howToUse: e.target.value })}
+                                    className="w-full border rounded p-2 h-24"
+                                    placeholder="Apply a small amount to clean skin..."
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium mb-1">Ingredients</label>
+                                <textarea
+                                    value={formData.ingredients}
+                                    onChange={e => setFormData({ ...formData, ingredients: e.target.value })}
+                                    className="w-full border rounded p-2 h-24"
+                                    placeholder="Aqua, Glycerin, Aloe Barbadensis Leaf Juice..."
+                                />
+                            </div>
+
+                            <div className="flex items-center gap-2 pt-2">
+                                <input
+                                    type="checkbox"
+                                    id="isNew"
+                                    checked={formData.isNew}
+                                    onChange={e => setFormData({ ...formData, isNew: e.target.checked })}
+                                    className="w-4 h-4"
+                                />
+                                <label htmlFor="isNew" className="text-sm font-medium">Mark as New Arrival</label>
                             </div>
 
                             <div className="pt-4 flex justify-end gap-3">
                                 <button type="button" onClick={closeModal} className="px-4 py-2 border rounded hover:bg-gray-50">Cancel</button>
-                                <button type="submit" className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 flex items-center gap-2">
-                                    <Save size={18} /> Save Product
+                                <button type="submit" disabled={uploading} className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 flex items-center gap-2 disabled:opacity-50">
+                                    <Save size={18} /> {uploading ? 'Uploading...' : 'Save Product'}
                                 </button>
                             </div>
                         </form>
