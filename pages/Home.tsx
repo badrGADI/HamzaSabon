@@ -23,7 +23,7 @@ const Home: React.FC = () => {
             {/* Hero Section */}
             <section className="relative h-[85vh] md:h-[90vh] w-full overflow-hidden">
                 <img
-                    src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=2000&auto=format&fit=crop"
+                    src="/images/hero_background.png"
                     alt="Botanical Skincare Background"
                     className="absolute inset-0 w-full h-full object-cover"
                 />
