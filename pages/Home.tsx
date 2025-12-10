@@ -23,8 +23,8 @@ const Home: React.FC = () => {
             {/* Hero Section */}
             <section className="relative h-[85vh] md:h-[90vh] w-full overflow-hidden">
                 <img
-                    src="/images/hero_background.png"
-                    alt="Botanical Skincare Background"
+                    src="/images/hero_naturvibe.png"
+                    alt="NaturVibe Botanical Skincare"
                     className="absolute inset-0 w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/40" />
