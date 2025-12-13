@@ -22,10 +22,17 @@ const Home: React.FC = () => {
         <div className="animate-fade-in">
             {/* Hero Section */}
             <section className="relative h-[85vh] md:h-[90vh] w-full overflow-hidden">
+                {/* Mobile Image - Only visible on small screens */}
+                <img
+                    src="/images/hero_mobile_naturvibe.jpg"
+                    alt="NaturVibe Botanical Skincare"
+                    className="absolute inset-0 w-full h-full object-cover md:hidden"
+                />
+                {/* Desktop/Tablet Image - Hidden on mobile */}
                 <img
                     src="/images/hero_naturvibe.png"
                     alt="NaturVibe Botanical Skincare"
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover hidden md:block"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/40" />
 
